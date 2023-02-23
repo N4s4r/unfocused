@@ -5,80 +5,100 @@ using UnityEngine;
 public class esmorzar_a_cegues : MonoBehaviour
 {
     private GameObject Up, Down, Left, Right, Poma, Tomaquet, tic_poma, tic_tomaquet;
-    private float h, l, x, y, Poma_left_boundry, Poma_right_boundry, Poma_down_boundry, Poma_up_boundry, Tomaquet_left_boundry, Tomaquet_right_boundry, Tomaquet_down_boundry, Tomaquet_up_boundry, xmouse, ymouse;
 
+    private float h, l, x, y;
+
+    private string[] names = new string[] {"Poma", "Tomaquet", "Formatge"};
+    private GameObject[] items = new GameObject[3];
+    private GameObject[] ticks = new GameObject[3];
+
+    private float Poma_left_boundry, Poma_right_boundry, Poma_down_boundry, Poma_up_boundry, Tomaquet_left_boundry, Tomaquet_right_boundry, Tomaquet_down_boundry, Tomaquet_up_boundry, xmouse, ymouse;
+    private float v;
+    private float timer = 0;
     // Start is called before the first frame update
     void Start()
     {
+        for(int i = 0; i < names.Length; i++)
+        {
+            items[i] = GameObject.Find(names[i]);
+            ticks[i] = GameObject.Find("tic_" + names[i]);
+        }
+        // Set every item to visible
+        foreach(GameObject item in items)
+        {
+            item.SetActive(true);
+        }
+        // Set every tick to not visible
+        foreach (GameObject tick in ticks)
+        {
+            tick.SetActive(false);
+        }
+
+        // Rectangles that reduces visibility
         Up = GameObject.Find("Up");
         Down = GameObject.Find("Down");
         Left = GameObject.Find("Left");
         Right = GameObject.Find("Right");
-        Poma = GameObject.Find("Poma");
-        Tomaquet = GameObject.Find("Tomaquet");
-        tic_poma = GameObject.Find("tic_poma");
-        tic_tomaquet = GameObject.Find("tic_tomaquet");
-        Poma_right_boundry = Poma.transform.position.x + 1f;
-        Poma_left_boundry = Poma.transform.position.x - 1f;
-        Poma_up_boundry = Poma.transform.position.y + 1f;
-        Poma_down_boundry = Poma.transform.position.y - 1f;
-        Tomaquet_right_boundry = Tomaquet.transform.position.x + 1f;
-        Tomaquet_left_boundry = Tomaquet.transform.position.x - 1f;
-        Tomaquet_up_boundry = Tomaquet.transform.position.y + 1f;
-        Tomaquet_down_boundry = Tomaquet.transform.position.y - 1f;
-        tic_poma.SetActive(false);
-        tic_tomaquet.SetActive(false);
+
+        // Passar a public
         h = 2; l = 2;
-        x = -7f;
+        x = -6f;
         y = 1;
+
+        //Velocity
+        v = 5.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float delta = Time.deltaTime * 10;
-        if (Input.GetKey("up"))
+        float delta = Time.deltaTime * v;
+        // Movement
+        if (Input.GetKey("w"))
         {
             y = Mathf.Min(5, y + delta);
         }
-        if (Input.GetKey("down"))
+        if (Input.GetKey("s"))
         {
             y = Mathf.Max(-5 + h, y - delta);
         }
-        if (Input.GetKey("left"))
+        if (Input.GetKey("a"))
         {
-            x = Mathf.Max(-12, x - delta);
+            x = Mathf.Max(-10, x - delta);
         }
-        if (Input.GetKey("right"))
+        if (Input.GetKey("d"))
         {
             x = Mathf.Min(-l, x + delta);
         }
-        if (Input.GetKeyDown("space"))
-        {
-            Debug.Log(x.ToString() + y.ToString());
-        }
+
+        // Take object
         if (Input.GetMouseButtonDown(0))
         {
             xmouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
             ymouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
-            if (xmouse < Tomaquet_right_boundry && xmouse > Tomaquet_left_boundry && Tomaquet_down_boundry < ymouse && ymouse < Tomaquet_up_boundry)
+            if (x < xmouse && xmouse < x + l && y - h < ymouse && ymouse < y)
             {
-                Debug.Log(x.ToString() + y.ToString());
-                Debug.Log("Tomaquet");
-                Tomaquet.SetActive(false);
-                tic_tomaquet.SetActive(true);
-            }
-            if (xmouse < Poma_right_boundry && xmouse > Poma_left_boundry && Poma_down_boundry < ymouse && ymouse < Poma_up_boundry)
-            {
-                Debug.Log(x.ToString() + y.ToString());
-                Debug.Log("POMAAAA");
-                Poma.SetActive(false);
-                tic_poma.SetActive(true);
+                for (int i = 0; i < names.Length; i++)
+                {
+                    GameObject go = items[i];
+                    float dx = xmouse - go.transform.position.x;
+                    float dy = ymouse - go.transform.position.y;
+                    float d2 = dx * dx + dy * dy;
+                    // Per calcular el contacte ho fem amb distancia euclidiana
+                    if (d2 < 0.4)
+                    {
+                        Debug.Log(names[i] + " at " + xmouse.ToString() + " " + ymouse.ToString());
+                        go.SetActive(false);
+                        ticks[i].SetActive(true);
+                    }
+                }
             }
         }
-        Up.gameObject.transform.localScale = new Vector3(12, 10 - 2*y, 1);
-        Down.gameObject.transform.localScale = new Vector3(12, 10 - 2 * (l - y), 1);
-        Left.gameObject.transform.localScale = new Vector3(24 + 2 * x, 10, 1);
+
+        Up.gameObject.transform.localScale = new Vector3(10, 10 - 2*y, 1);
+        Down.gameObject.transform.localScale = new Vector3(10, 10 + 2 * (y - h), 1);
+        Left.gameObject.transform.localScale = new Vector3(20 + 2 * x, 10, 1);
         Right.gameObject.transform.localScale = new Vector3(-2 * (x + l), 10, 1);
+        timer += Time.deltaTime;
     }
 }
