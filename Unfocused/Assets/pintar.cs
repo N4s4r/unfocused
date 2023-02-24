@@ -72,7 +72,7 @@ public class pintar : MonoBehaviour
                     Debug.Log("TTRIngle");
                     GameObject b = Instantiate(prefabs[i], Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
                     b.GetComponent<Renderer>().material.color = color;
-                    b.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(-3, -3, +3); ;
+                    b.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(0f, 2f, -3f); ;
                    
                 }
 
