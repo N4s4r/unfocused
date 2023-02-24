@@ -15,6 +15,7 @@ public class esmorzar_a_cegues : MonoBehaviour
     private float Poma_left_boundry, Poma_right_boundry, Poma_down_boundry, Poma_up_boundry, Tomaquet_left_boundry, Tomaquet_right_boundry, Tomaquet_down_boundry, Tomaquet_up_boundry, xmouse, ymouse;
     private float v;
     private float timer = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,8 +43,8 @@ public class esmorzar_a_cegues : MonoBehaviour
 
         // Passar a public
         h = 2; l = 2;
-        x = -6f;
-        y = 1;
+        x = 3.5f;
+        y = -3.5f;
 
         //Velocity
         v = 5.0f;
@@ -56,19 +57,19 @@ public class esmorzar_a_cegues : MonoBehaviour
         // Movement
         if (Input.GetKey("w"))
         {
-            y = Mathf.Min(5, y + delta);
+            y = Mathf.Min(0, y + delta);
         }
         if (Input.GetKey("s"))
         {
-            y = Mathf.Max(-5 + h, y - delta);
+            y = Mathf.Max(-9 + h, y - delta);
         }
         if (Input.GetKey("a"))
         {
-            x = Mathf.Max(-10, x - delta);
+            x = Mathf.Max(0, x - delta);
         }
         if (Input.GetKey("d"))
         {
-            x = Mathf.Min(-l, x + delta);
+            x = Mathf.Min(9 - l, x + delta);
         }
 
         // Take object
@@ -95,10 +96,10 @@ public class esmorzar_a_cegues : MonoBehaviour
             }
         }
 
-        Up.gameObject.transform.localScale = new Vector3(10, 10 - 2*y, 1);
-        Down.gameObject.transform.localScale = new Vector3(10, 10 + 2 * (y - h), 1);
-        Left.gameObject.transform.localScale = new Vector3(20 + 2 * x, 10, 1);
-        Right.gameObject.transform.localScale = new Vector3(-2 * (x + l), 10, 1);
+        Up.gameObject.transform.localScale = new Vector3(9, -2 * y, 1);
+        Down.gameObject.transform.localScale = new Vector3(9, 18 + 2 * (y - h), 1);
+        Left.gameObject.transform.localScale = new Vector3(2 * x, 9, 1);
+        Right.gameObject.transform.localScale = new Vector3(18 - 2 * (x + l), 9, 1);
         timer += Time.deltaTime;
     }
 }
