@@ -1,0 +1,83 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class pintar : MonoBehaviour
+{
+    private GameObject Wheel;
+    public GameObject Triangle, Cercle, Quadrat, Hexagon, Diamant;
+    private GameObject[] figures = new GameObject[5];
+    private GameObject[] prefabs = new GameObject[5];
+    private float xwheel, ywheel, xmouse, ymouse, xfigure, yfigure;
+    private Color color;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        figures[0] = GameObject.Find("Triangle");
+        figures[1] = GameObject.Find("Circle");
+        figures[2] = GameObject.Find("Square");
+        figures[3] = GameObject.Find("Hexagon");
+        figures[4] = GameObject.Find("Isometric Diamond");
+
+        prefabs[0] = Triangle;
+        prefabs[1] = Cercle;
+        prefabs[2] = Quadrat;
+        prefabs[3] = Hexagon;
+        prefabs[4] = Diamant;
+        Wheel = GameObject.Find("color wheel");
+        xwheel = Wheel.transform.position.x;
+        ywheel = Wheel.transform.position.y;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            xmouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
+            ymouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
+
+            //Change color
+            if (xwheel -1f < xmouse && xmouse < xwheel + 1f && ywheel - 1f < ymouse && ymouse < ywheel +1f)
+            {
+                if (xwheel - 0.1f < xmouse && xmouse < xwheel + 0.1f && ywheel - 1f < ymouse && ymouse < ywheel)
+                {
+                    color = new Color(0.643f, 0.129f, 0.920f);
+                }   
+                if (xwheel - 0.1f < xmouse && xmouse < xwheel + 0.1f && ywheel < ymouse && ymouse < ywheel + 1f)
+                {
+                    color = new Color(255/255, 255/255, 0/255);
+                }
+                if (xwheel - 1f < xmouse && xmouse < xwheel && ywheel - 0.1f < ymouse && ymouse < ywheel + 0.1f)
+                {
+                    color = new Color(51/255, 51/255, 255/255);
+                }
+                if (xwheel < xmouse && xmouse < xwheel + 1f && ywheel-0.1f < ymouse && ymouse < ywheel + 0.1f)
+                {
+                    color = new Color(255/255, 51/255, 51/255);//Color(255, 51, 51);
+                }
+                for (int i = 0; i < figures.Length; i++)
+                {
+                    figures[i].GetComponent<Renderer>().material.color = color;
+                }
+            }
+            //Afegir figura
+            for (int i = 0; i < figures.Length; i++)
+            {
+                xfigure = figures[i].transform.position.x;
+                yfigure = figures[i].transform.position.y;
+                if (xfigure - 1f < xmouse && xmouse < xfigure + 1f && yfigure - 1f < ymouse && ymouse < yfigure + 1f)
+                {
+                    Debug.Log("TTRIngle");
+                    GameObject b = Instantiate(prefabs[i], Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
+                    b.GetComponent<Renderer>().material.color = color;
+                    b.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(-3, -3, +3); ;
+                   
+                }
+
+            }
+            
+        }
+    }
+}
