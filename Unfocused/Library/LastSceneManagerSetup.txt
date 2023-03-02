@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/esmorzar_a_cegues.unity
+- path: "Assets/Scenes/tangram art\xEDstic.unity"
   isLoaded: 1
   isActive: 1
   isSubScene: 0

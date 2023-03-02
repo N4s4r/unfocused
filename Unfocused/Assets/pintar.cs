@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class pintar : MonoBehaviour
 {
-    private GameObject Wheel;
+    private GameObject Wheel, current;
     public GameObject Triangle, Cercle, Quadrat, Hexagon, Diamant;
     private GameObject[] figures = new GameObject[5];
     private GameObject[] prefabs = new GameObject[5];
-    private float xwheel, ywheel, xmouse, ymouse, xfigure, yfigure;
+    private float xwheel, ywheel, xmouse, ymouse, xfigure, yfigure, current_depth;
     private Color color;
+    private bool drawing;
 
     // Start is called before the first frame update
     void Start()
@@ -28,12 +29,14 @@ public class pintar : MonoBehaviour
         Wheel = GameObject.Find("color wheel");
         xwheel = Wheel.transform.position.x;
         ywheel = Wheel.transform.position.y;
+        drawing = false;
+        current_depth = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             xmouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
             ymouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
@@ -67,17 +70,27 @@ public class pintar : MonoBehaviour
             {
                 xfigure = figures[i].transform.position.x;
                 yfigure = figures[i].transform.position.y;
-                if (xfigure - 1f < xmouse && xmouse < xfigure + 1f && yfigure - 1f < ymouse && ymouse < yfigure + 1f)
+                if (xfigure - 1f < xmouse && xmouse < xfigure + 1f && yfigure - 1f < ymouse && ymouse < yfigure + 1f && !drawing)
                 {
+                    drawing = true;
                     Debug.Log("TTRIngle");
                     GameObject b = Instantiate(prefabs[i], Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
                     b.GetComponent<Renderer>().material.color = color;
-                    b.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(0f, 2f, -3f); ;
-                   
+                    current_depth += 0.00001f;
+                    //b.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(0f, 2f, -3f); ;
+                    current = b;
                 }
 
             }
-            
+            if (drawing && Camera.main.ScreenToWorldPoint(Input.mousePosition).x >0 && Camera.main.ScreenToWorldPoint(Input.mousePosition).y < 2.98)
+            {
+                current.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 3f - current_depth );
+            }
         }
+        else
+        {
+            drawing = false;
+        }
+        
     }
 }
