@@ -1,5 +1,5 @@
 sceneSetups:
-- path: "Assets/Scenes/tangram art\xEDstic.unity"
+- path: Assets/Scenes/Dinar_abstracte.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

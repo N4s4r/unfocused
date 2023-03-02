@@ -5,7 +5,8 @@ using UnityEngine;
 public class pintar : MonoBehaviour
 {
     private GameObject Wheel, current;
-    public GameObject Triangle, Cercle, Quadrat, Hexagon, Diamant;
+    public GameObject Triangle, Cercle, Quadrat, Hexagon, Diamant, Gnomo, Perrito, Gatito;
+    public int level;
     private GameObject[] figures = new GameObject[5];
     private GameObject[] prefabs = new GameObject[5];
     private float xwheel, ywheel, xmouse, ymouse, xfigure, yfigure, current_depth;
@@ -31,6 +32,22 @@ public class pintar : MonoBehaviour
         ywheel = Wheel.transform.position.y;
         drawing = false;
         current_depth = 0;
+        if (level == 1)
+        {
+            Gnomo.SetActive(false);
+            Perrito.SetActive(false);
+
+        }
+        if(level == 2)
+        {
+            Gatito.SetActive(false);
+            Perrito.SetActive(false);
+        }
+        if (level == 3)
+        {
+            Gnomo.SetActive(false);
+            Gatito.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -46,7 +63,7 @@ public class pintar : MonoBehaviour
             {
                 if (xwheel - 0.1f < xmouse && xmouse < xwheel + 0.1f && ywheel - 1f < ymouse && ymouse < ywheel)
                 {
-                    color = new Color(0.643f, 0.129f, 0.920f);
+                    color = new Color(0.60000f, 0.00000f, 0.80000f);//Color(0.643f, 0.129f, 0.920f); //Lila
                 }   
                 if (xwheel - 0.1f < xmouse && xmouse < xwheel + 0.1f && ywheel < ymouse && ymouse < ywheel + 1f)
                 {
@@ -54,12 +71,13 @@ public class pintar : MonoBehaviour
                 }
                 if (xwheel - 1f < xmouse && xmouse < xwheel && ywheel - 0.1f < ymouse && ymouse < ywheel + 0.1f)
                 {
-                    color = new Color(51/255, 51/255, 255/255);
+                    color = new Color(0.20000f, 0.60000f, 1.00000f);//Color(51/255, 51/255, 255/255); //blau
                 }
                 if (xwheel < xmouse && xmouse < xwheel + 1f && ywheel-0.1f < ymouse && ymouse < ywheel + 0.1f)
                 {
-                    color = new Color(255/255, 51/255, 51/255);//Color(255, 51, 51);
+                    color = new Color(0.10000f, 0.00000f, 0.0000f); // Color(255/255, 51/255, 51/255); //Vermell
                 }
+
                 for (int i = 0; i < figures.Length; i++)
                 {
                     figures[i].GetComponent<Renderer>().material.color = color;
