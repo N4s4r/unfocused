@@ -55,6 +55,19 @@ public class pintar : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
+            if (Input.GetKey(KeyCode.E) && drawing)
+            {
+                current.transform.Rotate(0,0,-100*Time.deltaTime,Space.Self);
+            }
+            if (Input.GetKey(KeyCode.Q) && drawing)
+            {
+                current.transform.Rotate(0, 0, 100 * Time.deltaTime, Space.Self);
+            }
+            if (Input.mouseScrollDelta.y != 0)
+            {
+                current.gameObject.transform.localScale = current.transform.localScale * Mathf.Pow(1.1f, Input.mouseScrollDelta.y);
+            }
+
             xmouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
             ymouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
 
