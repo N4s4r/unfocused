@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class esmorzar_a_cegues : MonoBehaviour
 {
     private GameObject Up, Down, Left, Right, Poma, Tomaquet, tic_poma, tic_tomaquet;
-
+    public TMP_Text timer;
     private float h, l, x, y;
 
     private string[] names = new string[] {"Poma", "Tomaquet", "Formatge"};
@@ -14,7 +15,7 @@ public class esmorzar_a_cegues : MonoBehaviour
 
     private float Poma_left_boundry, Poma_right_boundry, Poma_down_boundry, Poma_up_boundry, Tomaquet_left_boundry, Tomaquet_right_boundry, Tomaquet_down_boundry, Tomaquet_up_boundry, xmouse, ymouse;
     private float v;
-    private float timer = 0;
+    private float time = 60;
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +54,14 @@ public class esmorzar_a_cegues : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (time > 0)
+        {
+            time -= Time.deltaTime;
+            float minutes = Mathf.FloorToInt(time / 60);
+            float seconds = Mathf.FloorToInt(time % 60);
+            timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        } 
+        
         float delta = Time.deltaTime * v;
         // Movement
         if (Input.GetKey("w"))
@@ -100,6 +109,5 @@ public class esmorzar_a_cegues : MonoBehaviour
         Down.gameObject.transform.localScale = new Vector3(9, 18 + 2 * (y - h), 1);
         Left.gameObject.transform.localScale = new Vector3(2 * x, 9, 1);
         Right.gameObject.transform.localScale = new Vector3(18 - 2 * (x + l), 9, 1);
-        timer += Time.deltaTime;
     }
 }
