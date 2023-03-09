@@ -4,9 +4,9 @@ using TMPro;
 public class ScoreSystem : MonoBehaviour
 {
 
-    public int score;
+    public float score;
     //private GameObject scoreText;
-    public GameObject scoreText;
+    public TMP_Text scoreText;
     void Start()
     {
         //scoreText = GameObject.Find("Score");
@@ -19,21 +19,22 @@ public class ScoreSystem : MonoBehaviour
         //scoreText.GetComponent<TextMeshPro>().SetText("Alumnes encertats: "+score.ToString());
     }
 
-    public void AddScore(int amount)
+    public void AddScore(float amount)
     {
         score += amount;
-        scoreText.gameObject.GetComponent<TextMeshPro>().SetText("Alumnes encertats: ");// + score.ToString());
+        scoreText.text="Punts: "+ score.ToString();
     }
-    public void SubtractScore(int amount)
+    public void SubtractScore(float amount)
     {
         score -= amount;
+        scoreText.text = "Punts: " + score.ToString();
     }
     public void Save()
     {
-        PlayerPrefs.SetInt("score", score);
+        PlayerPrefs.SetFloat("score", score);
     }
     public void Load()
     {
-        score = PlayerPrefs.GetInt("score");
+        score = PlayerPrefs.GetFloat("score");
     }
 }

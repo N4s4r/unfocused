@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class passar_llista : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class passar_llista : MonoBehaviour
     private List<string> alumnes_trobats, alumnes;
     private string current_alumne;
     public GameObject scoreSystem;
+    public float time=60;
+    public TMP_Text timer;
+    public ParticleSystem blur;
     // Start is called before the first frame update
     void Start()
     {       
@@ -27,6 +31,10 @@ public class passar_llista : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        time -= Time.deltaTime;
+        float minutes = Mathf.FloorToInt(time / 60);
+        float seconds = Mathf.FloorToInt(time % 60);
+        timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         if (Input.GetMouseButtonDown(0) && alumnes.Count>0)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -47,7 +55,16 @@ public class passar_llista : MonoBehaviour
                         alumne = GameObject.Find(current_alumne);
                         alumne.GetComponent<SpriteRenderer>().enabled = true;
                     }
+                    else
+                    {
+                        scoreSystem.GetComponent<ScoreSystem>().AddScore(0.1f*time);
+                        blur.Stop();
+                    }
                     
+                }
+                else
+                {
+                    scoreSystem.GetComponent<ScoreSystem>().SubtractScore(1);
                 }
                 
             }
