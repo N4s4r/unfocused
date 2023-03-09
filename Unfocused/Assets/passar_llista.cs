@@ -9,12 +9,15 @@ public class passar_llista : MonoBehaviour
     private List<string> alumnes_trobats, alumnes;
     private string current_alumne;
     public GameObject scoreSystem;
-    public float time=60;
-    public TMP_Text timer;
+    public float time=60f, time_speaking, particle_size = 2f;
+    public TMP_Text timer, titol;
     public ParticleSystem blur;
+    private int level = 1;
     // Start is called before the first frame update
     void Start()
-    {       
+    {
+        titol.text = "Llista Estudiants 202" + level.ToString();
+        time_speaking = 0f;
         alumnes_trobats = new List<string>();
         alumnes = new List<string>(){"pau", "júlia", "berta", "adrià", "laura", "tresa", "núria", "eloi", "toni", "marc", "nil", "rita", "elsa", "ana", "maria", "xavi"};
         current_alumne = alumnes[Random.Range(0, alumnes.Count)];
@@ -31,10 +34,16 @@ public class passar_llista : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time -= Time.deltaTime;
-        float minutes = Mathf.FloorToInt(time / 60);
-        float seconds = Mathf.FloorToInt(time % 60);
-        timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        time_speaking += Time.deltaTime;
+        var main = blur.main;
+        main.startSize = particle_size - 0.1f*time_speaking;
+        if (time > 0)
+        {
+            time -= Time.deltaTime;
+            float minutes = Mathf.FloorToInt(time / 60);
+            float seconds = Mathf.FloorToInt(time % 60);
+            timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        }
         if (Input.GetMouseButtonDown(0) && alumnes.Count>0)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -49,6 +58,8 @@ public class passar_llista : MonoBehaviour
                     alumnes_trobats.Add(current_alumne);
                     alumnes.Remove(current_alumne);
                     scoreSystem.GetComponent<ScoreSystem>().AddScore(1);
+                    particle_size = 2f;
+                    time_speaking = 0f;
                     if (alumnes.Count > 0)
                     {
                         current_alumne = alumnes[Random.Range(0, alumnes.Count)];
