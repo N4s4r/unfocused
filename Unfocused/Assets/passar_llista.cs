@@ -7,7 +7,7 @@ public class passar_llista : MonoBehaviour
     private GameObject alumne;
     private List<string> alumnes_trobats, alumnes;
     private string current_alumne;
-   
+    public GameObject scoreSystem;
     // Start is called before the first frame update
     void Start()
     {       
@@ -40,6 +40,7 @@ public class passar_llista : MonoBehaviour
                     alumne.GetComponent<SpriteRenderer>().enabled = false;
                     alumnes_trobats.Add(current_alumne);
                     alumnes.Remove(current_alumne);
+                    scoreSystem.GetComponent<ScoreSystem>().AddScore(1);
                     if (alumnes.Count > 0)
                     {
                         current_alumne = alumnes[Random.Range(0, alumnes.Count)];
