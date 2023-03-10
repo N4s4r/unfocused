@@ -6,7 +6,6 @@ public class pintar : MonoBehaviour
 {
     private GameObject Wheel, current;
     public GameObject Triangle, Cercle, Quadrat, Hexagon, Diamant, Gnomo, Perrito, Gatito;
-    public int level;
     private GameObject[] figures = new GameObject[5];
     private GameObject[] prefabs = new GameObject[5];
     private float xwheel, ywheel, xmouse, ymouse, xfigure, yfigure, current_depth;
@@ -32,18 +31,18 @@ public class pintar : MonoBehaviour
         ywheel = Wheel.transform.position.y;
         drawing = false;
         current_depth = 0;
-        if (level == 1)
+        if (play.level == 1)
         {
             Gnomo.SetActive(false);
             Perrito.SetActive(false);
 
         }
-        if(level == 2)
+        if(play.level == 2)
         {
             Gatito.SetActive(false);
             Perrito.SetActive(false);
         }
-        if (level == 3)
+        if (play.level == 3)
         {
             Gnomo.SetActive(false);
             Gatito.SetActive(false);

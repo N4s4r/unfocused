@@ -4,7 +4,7 @@ using TMPro;
 public class ScoreSystem : MonoBehaviour
 {
 
-    public float score;
+    public static float score;
     //private GameObject scoreText;
     public TMP_Text scoreText;
     void Start()
