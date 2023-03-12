@@ -2,38 +2,73 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq;
+
 
 public class esmorzar_a_cegues : MonoBehaviour
 {
+    public TMP_Text definicio;
     private GameObject Up, Down, Left, Right, Poma, Tomaquet, tic_poma, tic_tomaquet;
     public TMP_Text timer;
     private float h, l, x, y;
 
-    private string[] names = new string[] {"Poma", "Tomaquet", "Formatge"};
-    private GameObject[] items = new GameObject[3];
-    private GameObject[] ticks = new GameObject[3];
+    private GameObject[] itemsDay1 = new GameObject[20];
+    private GameObject[] itemsDay2 = new GameObject[21];
+    private GameObject[] itemsDay3 = new GameObject[21];
 
-    private float Poma_left_boundry, Poma_right_boundry, Poma_down_boundry, Poma_up_boundry, Tomaquet_left_boundry, Tomaquet_right_boundry, Tomaquet_down_boundry, Tomaquet_up_boundry, xmouse, ymouse;
+    private string[] namesDay1 = new string[20] {"formatge", "poma", "tomaquet", "cupcake", "pizza", "pastis", "galeta", "llet", "coco", "pernil", "baco", "aigua", "vodka", "taronja", "churros", "nap", "nacho", "iogurt", "nabiu", "pases"};
+    private string[] namesDay2 = new string[21] {"pa", "magdalena", "croissant", "mantega_cacahuet", "mantega", "margarina", "mermelada", "llet_2", "formatge_2", "champinyons", "coliflor", "pera", "blat", "cocombre", "patata", "alberginia", "carbassa", "kiwi", "ou", "platan", "llenties"};
+    private string[] namesDay3 = new string[21] {"croissant_2", "galeta_2", "magdalena_2", "pastis_2", "pa_2", "donut", "gelat", "batut_xocolata", "xocolata", "patata_2", "kiwi_2", "ou_2", "nou", "trufa", "datils", "taronja_2", "olives", "coco_2", "pollastre", "baco_2", "vodka_2"};
+
+    private string[] correct_name_day_1 = new string[5] {"poma", "taronja", "coco", "formatge", "aigua"};
+    private string[] correct_name_day_2 = new string[6] {"pa", "mantega", "mermelada", "llet_2", "pera", "platan"};
+    private string[] correct_name_day_3 = new string[7] {"pastis_2", "magdalena_2", "batut_xocolata", "donut", "xocolata", "croissant_2", "vodka_2"};
+
+    private GameObject[] ticks_day_1 = new GameObject[5];
+    private GameObject[] ticks_day_2 = new GameObject[6];
+    private GameObject[] ticks_day_3 = new GameObject[7];
+
+    private string definitionsDay1 = "Poma \r\n \r\nTaronja \r\n \r\nCoco \r\n \r\nFormatge \r\n \r\nAigua";
+    private string definitionsDay2 = "Pa \r\n \r\nMantega \r\n \r\nMermelada \r\n \r\nLlet \r\n \r\nPera \r\n \r\nPlatan";
+    private string definitionsDay3 = "Pastis \r\n \r\nMagdalena \r\n \r\nBatut_xocolata \r\n \r\nDonut \r\n \r\nXocolata \r\n \r\nCroissant \r\n \r\nVodka";
+
     private float v;
     private float time = 60;
+
+    private float xmouse, ymouse;
+
+    private int day;
 
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < names.Length; i++)
+        day = 2;
+        
+        for(int i = 0; i < namesDay1.Length; i++)
         {
-            items[i] = GameObject.Find(names[i]);
-            ticks[i] = GameObject.Find("tic_" + names[i]);
+            itemsDay1[i] = GameObject.Find(namesDay1[i]);
         }
-        // Set every item to visible
-        foreach(GameObject item in items)
-        {
-            item.SetActive(true);
+
+        for(int i = 0; i < correct_name_day_1.Length; i++) {
+            ticks_day_1[i] = GameObject.Find("tic_" + correct_name_day_1[i]);
         }
-        // Set every tick to not visible
-        foreach (GameObject tick in ticks)
+
+        for(int i = 0; i < namesDay2.Length; i++)
         {
-            tick.SetActive(false);
+            itemsDay2[i] = GameObject.Find(namesDay2[i]);
+        }
+
+        for(int i = 0; i < correct_name_day_2.Length; i++) {
+            ticks_day_2[i] = GameObject.Find("tic_" + correct_name_day_2[i]);
+        }
+
+        for(int i = 0; i < namesDay3.Length; i++)
+        {
+            itemsDay3[i] = GameObject.Find(namesDay3[i]);
+        }
+
+        for(int i = 0; i < correct_name_day_3.Length; i++) {
+            ticks_day_3[i] = GameObject.Find("tic_" + correct_name_day_3[i]);
         }
 
         // Rectangles that reduces visibility
@@ -43,12 +78,89 @@ public class esmorzar_a_cegues : MonoBehaviour
         Right = GameObject.Find("Right");
 
         // Passar a public
-        h = 2; l = 2;
         x = 3.5f;
         y = -3.5f;
 
         //Velocity
         v = 5.0f;
+
+        // Set every tick to not visible
+        foreach (GameObject tick in ticks_day_1)
+        {
+            tick.SetActive(false);
+        }
+
+        foreach (GameObject tick in ticks_day_2)
+        {
+            tick.SetActive(false);
+        }
+
+        foreach (GameObject tick in ticks_day_3)
+        {
+            tick.SetActive(false);
+        }
+
+        if (day == 1) {
+            h = 2; l = 2;
+
+            definicio.text = definitionsDay1;
+
+            // Set every item to visible
+            foreach(GameObject item in itemsDay1)
+            {
+                item.SetActive(true);
+            }
+
+            foreach(GameObject item in itemsDay2)
+            {
+                item.SetActive(false);
+            }
+
+            foreach(GameObject item in itemsDay3)
+            {
+                item.SetActive(false);
+            }
+        } else if (day == 2) {
+            h = 1; l = 1;
+
+            definicio.text = definitionsDay2;
+
+            // Set every item to visible
+            foreach(GameObject item in itemsDay2)
+            {
+                item.SetActive(true);
+            }
+
+            foreach(GameObject item in itemsDay1)
+            {
+                item.SetActive(false);
+            }
+
+            foreach(GameObject item in itemsDay3)
+            {
+                item.SetActive(false);
+            }
+        } else {
+            h = 0.5f; l = 0.5f;
+
+            definicio.text = definitionsDay3;
+
+            // Set every item to visible
+            foreach(GameObject item in itemsDay3)
+            {
+                item.SetActive(true);
+            }
+
+            foreach(GameObject item in itemsDay2)
+            {
+                item.SetActive(false);
+            }
+
+            foreach(GameObject item in itemsDay1)
+            {
+                item.SetActive(false);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -81,26 +193,134 @@ public class esmorzar_a_cegues : MonoBehaviour
             x = Mathf.Min(9 - l, x + delta);
         }
 
-        // Take object
-        if (Input.GetMouseButtonDown(0))
-        {
+        if (day == 1) {
             xmouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
             ymouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
-            if (x < xmouse && xmouse < x + l && y - h < ymouse && ymouse < y)
-            {
-                for (int i = 0; i < names.Length; i++)
+
+            if (Input.GetMouseButtonDown(0) && (x < xmouse + 127.2f && xmouse + 127.0f < x + l && y - h < ymouse + 71.5f && ymouse + 71.0f < y))
+            {                
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, 100))
                 {
-                    GameObject go = items[i];
-                    float dx = xmouse - go.transform.position.x;
-                    float dy = ymouse - go.transform.position.y;
-                    float d2 = dx * dx + dy * dy;
-                    // Per calcular el contacte ho fem amb distancia euclidiana
-                    if (d2 < 0.4)
+
+                    Debug.Log(hit.transform.gameObject.name);
+
+                    
+                    if(correct_name_day_1.Contains(hit.transform.gameObject.name))
                     {
-                        Debug.Log(names[i] + " at " + xmouse.ToString() + " " + ymouse.ToString());
-                        go.SetActive(false);
-                        ticks[i].SetActive(true);
+
+                        for (int i = 0; i < namesDay1.Length; i++) {
+                            if (namesDay1[i] == hit.transform.gameObject.name) {
+                                itemsDay1[i].SetActive(false);
+                            }
+                        }
+
+                        for (int i = 0; i < correct_name_day_1.Length; i++) {
+                            if (correct_name_day_1[i] == hit.transform.gameObject.name) {
+                                ticks_day_1[i].SetActive(true);
+                            }
+                        }
+
+                        Debug.Log("correct");
                     }
+
+                    else {
+                        time -= 5;
+                        float minutes = Mathf.FloorToInt(time / 60);
+                        float seconds = Mathf.FloorToInt(time % 60);
+                        timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+                        Debug.Log("error");
+                    }                   
+                }
+            }
+        }
+
+        else if (day == 2) {
+            xmouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
+            ymouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
+
+            if (Input.GetMouseButtonDown(0) && (x < xmouse + 127.2f && xmouse + 127.0f < x + l && y - h < ymouse + 71.5f && ymouse + 71.0f < y))
+            {                
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, 100))
+                {
+
+                    Debug.Log(hit.transform.gameObject.name);
+
+                    
+                    if(correct_name_day_2.Contains(hit.transform.gameObject.name))
+                    {
+
+                        for (int i = 0; i < namesDay2.Length; i++) {
+                            if (namesDay2[i] == hit.transform.gameObject.name) {
+                                itemsDay2[i].SetActive(false);
+                            }
+                        }
+
+                        for (int i = 0; i < correct_name_day_2.Length; i++) {
+                            if (correct_name_day_2[i] == hit.transform.gameObject.name) {
+                                ticks_day_2[i].SetActive(true);
+                            }
+                        }
+
+                        Debug.Log("correct");
+                    }
+
+                    else {
+                        time -= 5;
+                        float minutes = Mathf.FloorToInt(time / 60);
+                        float seconds = Mathf.FloorToInt(time % 60);
+                        timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+                        Debug.Log("error");
+                    }                   
+                }
+            }
+        }
+
+        else {
+            xmouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
+            ymouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
+
+            if (Input.GetMouseButtonDown(0) && (x < xmouse + 127.2f && xmouse + 127.0f < x + l && y - h < ymouse + 71.5f && ymouse + 71.0f < y))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, 100))
+                {
+
+                    Debug.Log(hit.transform.gameObject.name);
+
+                    
+                    if(correct_name_day_3.Contains(hit.transform.gameObject.name))
+                    {
+
+                        for (int i = 0; i < namesDay3.Length; i++) {
+                            if (namesDay3[i] == hit.transform.gameObject.name) {
+                                itemsDay3[i].SetActive(false);
+                            }
+                        }
+
+                        for (int i = 0; i < correct_name_day_3.Length; i++) {
+                            if (correct_name_day_3[i] == hit.transform.gameObject.name) {
+                                ticks_day_3[i].SetActive(true);
+                            }
+                        }
+
+                        Debug.Log("correct");
+                    }
+
+                    else {
+                        time -= 5;
+                        float minutes = Mathf.FloorToInt(time / 60);
+                        float seconds = Mathf.FloorToInt(time % 60);
+                        timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+                        Debug.Log("error");
+                    }                   
                 }
             }
         }
