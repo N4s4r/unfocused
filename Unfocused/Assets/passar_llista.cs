@@ -11,7 +11,7 @@ public class passar_llista : MonoBehaviour
     private string current_alumne;
     public GameObject scoreSystem;
     public static float time=60f, time_speaking, particle_size = 2f;
-    public TMP_Text timer, titol;
+    public TMP_Text timer, titol, txt_alumnes;
     public ParticleSystem blur;
     
     // Start is called before the first frame update
@@ -62,6 +62,7 @@ public class passar_llista : MonoBehaviour
                     particle_size = 2f;
                     time_speaking = 0f;
                     num_alumnes += 1;
+                    txt_alumnes.text = "Estudiants Reconeguts: " + num_alumnes.ToString() + "/16";
                     if (alumnes.Count > 0)
                     {
                         current_alumne = alumnes[Random.Range(0, alumnes.Count)];

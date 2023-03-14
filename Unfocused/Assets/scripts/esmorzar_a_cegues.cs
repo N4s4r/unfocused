@@ -7,7 +7,7 @@ using System.Linq;
 
 public class esmorzar_a_cegues : MonoBehaviour
 {
-    public TMP_Text definicio;
+    public TMP_Text definicio, data;
     private GameObject Up, Down, Left, Right, Poma, Tomaquet, tic_poma, tic_tomaquet;
     public TMP_Text timer;
     private float h, l, x, y;
@@ -33,8 +33,8 @@ public class esmorzar_a_cegues : MonoBehaviour
     private string definitionsDay3 = "Pastis \r\n \r\nMagdalena \r\n \r\nBatut_xocolata \r\n \r\nDonut \r\n \r\nXocolata \r\n \r\nCroissant \r\n \r\nVodka";
 
     private float v;
-    private float time = 60;
-
+    public static float time = 60;
+    public static int num_correct = 0, num_aliments = 100;
     private float xmouse, ymouse;
 
     private int day;
@@ -42,9 +42,9 @@ public class esmorzar_a_cegues : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        day = 2;
-        
-        for(int i = 0; i < namesDay1.Length; i++)
+        day = play.level;
+        data.text = "19/06/2" + day.ToString();
+        for (int i = 0; i < namesDay1.Length; i++)
         {
             itemsDay1[i] = GameObject.Find(namesDay1[i]);
         }
@@ -70,7 +70,7 @@ public class esmorzar_a_cegues : MonoBehaviour
         for(int i = 0; i < correct_name_day_3.Length; i++) {
             ticks_day_3[i] = GameObject.Find("tic_" + correct_name_day_3[i]);
         }
-
+        
         // Rectangles that reduces visibility
         Up = GameObject.Find("Up");
         Down = GameObject.Find("Down");
@@ -102,7 +102,7 @@ public class esmorzar_a_cegues : MonoBehaviour
 
         if (day == 1) {
             h = 2; l = 2;
-
+            num_aliments = correct_name_day_1.Length;
             definicio.text = definitionsDay1;
 
             // Set every item to visible
@@ -122,7 +122,7 @@ public class esmorzar_a_cegues : MonoBehaviour
             }
         } else if (day == 2) {
             h = 1; l = 1;
-
+            num_aliments = correct_name_day_2.Length;
             definicio.text = definitionsDay2;
 
             // Set every item to visible
@@ -142,7 +142,7 @@ public class esmorzar_a_cegues : MonoBehaviour
             }
         } else {
             h = 0.5f; l = 0.5f;
-
+            num_aliments = correct_name_day_3.Length;
             definicio.text = definitionsDay3;
 
             // Set every item to visible
@@ -222,7 +222,7 @@ public class esmorzar_a_cegues : MonoBehaviour
                                 ticks_day_1[i].SetActive(true);
                             }
                         }
-
+                        num_correct += 1;
                         Debug.Log("correct");
                     }
 

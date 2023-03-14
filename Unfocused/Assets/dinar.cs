@@ -5,7 +5,7 @@ using TMPro;
 
 public class dinar : MonoBehaviour
 {
-    public TMP_Text definicio; 
+    public TMP_Text definicio, data; 
     private int day;
     private GameObject[,] itemsDay1 = new GameObject[4,5];
     private GameObject[,] itemsDay2 = new GameObject[5,6];
@@ -21,7 +21,7 @@ public class dinar : MonoBehaviour
     //private GameObject[] itemsDay2 = new GameObject[6][6];
     //private GameObject[] itemsDay3 = new GameObject[7][7];
 
-    private int id;
+    public static int id, size=100, correctes=0;
 
     public int points = 0;
 
@@ -46,8 +46,8 @@ public class dinar : MonoBehaviour
         bombolles_vermelles.SetActive(false);
 
         id = 0;
-        day = 3;
-
+        day = play.level;
+        data.text = "15/02/2" + day.ToString();
         for(int i = 0; i < namesDay1.GetLength(0); i++)
         {
             for(int j = 0; j < namesDay1.GetLength(1); j++) {
@@ -69,8 +69,8 @@ public class dinar : MonoBehaviour
         
         if (day == 1) {
             definicio.text = definitionsDay1[0];
-
-            for(int i = 0; i < itemsDay1.GetLength(0); i++)
+            size = definitionsDay1.Length;
+            for (int i = 0; i < itemsDay1.GetLength(0); i++)
             {
                 for(int j = 0; j < itemsDay1.GetLength(1); j++) {
                     if (i == 0) {
@@ -95,8 +95,8 @@ public class dinar : MonoBehaviour
         }
         else if (day == 2) {
             definicio.text = definitionsDay2[0];
-
-            for(int i = 0; i < itemsDay2.GetLength(0); i++)
+            size = definitionsDay2.Length;
+            for (int i = 0; i < itemsDay2.GetLength(0); i++)
             {
                 for(int j = 0; j < itemsDay2.GetLength(1); j++) {
                     if (i == 0) {
@@ -121,8 +121,8 @@ public class dinar : MonoBehaviour
         }
         else {
             definicio.text = definitionsDay3[0];
-
-            for(int i = 0; i < itemsDay3.GetLength(0); i++)
+            size = definitionsDay3.Length;
+            for (int i = 0; i < itemsDay3.GetLength(0); i++)
             {
                 for(int j = 0; j < itemsDay3.GetLength(1); j++) {
                     if (i == 0) {
@@ -178,6 +178,7 @@ public class dinar : MonoBehaviour
                         bombolles_blaves.SetActive(true);
                         Debug.Log("+1");
                         scoreSystem.GetComponent<ScoreSystem>().AddScore(1);
+                        correctes += 1;
                     }
                     else
                     {
@@ -196,6 +197,7 @@ public class dinar : MonoBehaviour
                             itemsDay1[id, i].SetActive(true);
                         }
                     } else {
+                        id = 4;
                         definicio.text = "";
                     }
                     
@@ -220,6 +222,7 @@ public class dinar : MonoBehaviour
                         bombolles_vermelles.SetActive(false);
                         bombolles_blaves.SetActive(true);       
                         scoreSystem.GetComponent<ScoreSystem>().AddScore(1);
+                        correctes += 1;
                     }
                     else
                     {
@@ -237,6 +240,7 @@ public class dinar : MonoBehaviour
                             itemsDay2[id, i].SetActive(true);
                         }
                     } else {
+                        id = 5;
                         definicio.text = "";
                     }
                     
@@ -261,6 +265,7 @@ public class dinar : MonoBehaviour
                         bombolles_vermelles.SetActive(false);
                         bombolles_blaves.SetActive(true);                  
                         scoreSystem.GetComponent<ScoreSystem>().AddScore(1);
+                        correctes += 1;
                     }
                     else
                     {
@@ -278,6 +283,7 @@ public class dinar : MonoBehaviour
                             itemsDay3[id, i].SetActive(true);
                         }
                     } else {
+                        id = 6;
                         definicio.text = "";
                     }
                     
