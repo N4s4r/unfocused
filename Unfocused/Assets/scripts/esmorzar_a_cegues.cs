@@ -266,7 +266,7 @@ public class esmorzar_a_cegues : MonoBehaviour
                                 ticks_day_2[i].SetActive(true);
                             }
                         }
-
+                        num_correct += 1;
                         Debug.Log("correct");
                     }
 
@@ -310,7 +310,7 @@ public class esmorzar_a_cegues : MonoBehaviour
                                 ticks_day_3[i].SetActive(true);
                             }
                         }
-
+                        num_correct += 1;
                         Debug.Log("correct");
                     }
 

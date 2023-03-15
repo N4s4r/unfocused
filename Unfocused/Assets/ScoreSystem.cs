@@ -11,6 +11,7 @@ public class ScoreSystem : MonoBehaviour
     {
         //scoreText = GameObject.Find("Score");
         //scoreText.GetComponent<TextMeshPro>().SetText("Alumnes encertats: " + score.ToString());
+        score = 0;
     }
 
 
