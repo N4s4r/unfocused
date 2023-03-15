@@ -8,7 +8,7 @@ using TMPro;
 public class play : MonoBehaviour
 {
     // Start is called before the first frame update
-    public static int level = 1;
+    public static int level = 3;
     float[,] scores = new float[4,3];
     string current_scene;
     List<string> scenes;
@@ -24,11 +24,12 @@ public class play : MonoBehaviour
         missatges.Add(new List<string>() {"El Dr P. va ser un músic de distinció, conegut durant molts anys com a cantant, i després, a l'Escola de Música local, com a professor.\n\n Recentment el seu voltant s'havia adonat de petits incidents que denotaven que el Dr P. veia característiques individuals, però no veient el seu context.",
             "Uns mesos mes tard es va adonar que cada cop la seva visio abarcava menys i per tant shavia de despertar mes pronte per fer lesmorzar", "La malaltia ha empitjorat molt i ja no es capaç de veure un objecte al complet. Ha de fer servir la intuicio per treure els aliments de la nevera per tal de fer-se l’esmorzar abans d’anar a l’escola"});
         missatges.Add(new List<string>() {"Va ser a l'escola, en relació als seus alumnes, on certs problemes estranys van ser primer observats.\nDe vegades es presentava un estudiant, i el Dr P. no el reconeixeria; o, concretament, no reconeixeria la seva cara. En el moment en què l'alumne parlés, el reconeixeria per la seva veu.",
-            "2Patata", "2Patata"});
+            "Aquests incidents es van multiplicar, provocant vergonya, perplexitat, por i, de vegades, comèdia.", "El doctor P. no veia bé les cares cada cop més."});
         missatges.Add(new List<string>(){ "Últimament tornava a casa per dinar. La seva dona li havia ensenyat a cuinar els seus plats preferits. Ell s'havia apuntat tots els ingredients que necesitava per preparar-los.", "La seva dona s'havia acostumat a trobar el dinar fet, però ell tenia dificultats per trobar els aliments que necessitava. Les descripcions que tenia dins el seu cap eren massa generals per identificar amb claretat els ingredients", "Li agradava fer el dinar ell, però cada vegada guardava menys les particularitats de cada aliment. Ja no podra complir el somni de presentar-se a masterchef" });
         missatges.Add(new List<string>() { "A la tarda li agradava passar l'estona pintant el que veia per la finestra...", "Durant les pauses que realitzava a les tardes, veia que ja no sabia veure els detalls del que veia per la finestra i per tant les seves pintures deixaven de ser tant realistes", "Quan decideix posar-se a pintar el que observa pel seu jardí no veu la forma de representar-ho, nomes li venen figures geometriques molt simples al cap" });
         missatges.Add(new List<string>() {"El Dr P. va consultar un oftalmòleg, que va examinar els seus ulls detingudament:\n'No passa res amb els teus ulls. Però hi ha problemes amb les parts visuals del vostre cervell. No necessiteu la meva ajuda, heu de veure un neuròleg.'.\n I així, arran d’aquesta derivació, el doctor P. va anar a veure Oliver Sacks.",
-            "5Pat", "·5pat"});
+            "Les seves respostes eren molt curioses. Els seus ulls passaven d'una cosa a l'altra, agafant minúsculs trets, trets individuals, com havien fet amb la meva cara. Una brillantor sorprenent, un color, una forma cridaria la seva atenció i faria comentaris.",
+            "No va poder veure el complert, només detalls, que va veure com taques en una pantalla de radar. Devia haver mirat horroritzat, però semblava pensar que ho havia fet bastant bé. Hi havia un toc de somriure a la seva cara. No podia entendre el que havia passat en termes de neurologia convencional."});
         done = false;
         done0 = false;
         done01 = false;
@@ -55,9 +56,18 @@ public class play : MonoBehaviour
     {
         if (level == 4 && done41)
         {
+            Doctor.gameObject.SetActive(false);
+            textDisplay.gameObject.SetActive(true);
+            textDisplay2.gameObject.SetActive(false);
+            abstracte.gameObject.SetActive(false);
+            tangram.gameObject.SetActive(false);
+            esmorzar.gameObject.SetActive(false);
+            detalls.gameObject.SetActive(false);
+            total.gameObject.SetActive(false);
             final.gameObject.SetActive(true);
-            playButton.GetComponentInChildren<TextMeshProUGUI>().text = "End Game";
+            playButton.GetComponentInChildren<TextMeshProUGUI>().text = "END";
             ButtonControlPlay.myBoolean = false;
+            level += 1;
             Debug.Log("FINALLL");
         }
         else if (level > 4)
@@ -193,9 +203,9 @@ public class play : MonoBehaviour
                 var lastLoadedScene = SceneManager.GetSceneAt(lastSceneIndex);
                 // Unload Scene
                 camera.gameObject.SetActive(true);
-                while(pintar.my_draws.Count!=0)
+                for(int i = 0; i< pintar.my_draws.Count; i++)
                 {
-                    Destroy(pintar.my_draws[0], 0);
+                    pintar.my_draws[i].gameObject.SetActive(false);
                 }
                 SceneManager.UnloadSceneAsync(lastLoadedScene);
 

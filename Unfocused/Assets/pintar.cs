@@ -32,18 +32,18 @@ public class pintar : MonoBehaviour
         ywheel = Wheel.transform.position.y;
         drawing = false;
         current_depth = 0;
-        if (play.level == 1)
+        if (play.level == 3)
         {
             Gnomo.SetActive(false);
             Perrito.SetActive(false);
 
         }
-        if (play.level == 2)
+        if (play.level == 1)
         {
             Gatito.SetActive(false);
             Perrito.SetActive(false);
         }
-        if (play.level == 3)
+        if (play.level == 2)
         {
             Gnomo.SetActive(false);
             Gatito.SetActive(false);
