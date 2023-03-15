@@ -11,6 +11,7 @@ public class pintar : MonoBehaviour
     private float xwheel, ywheel, xmouse, ymouse, xfigure, yfigure, current_depth;
     private Color color;
     private bool drawing;
+    public static List<GameObject> my_draws = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +38,7 @@ public class pintar : MonoBehaviour
             Perrito.SetActive(false);
 
         }
-        if(play.level == 2)
+        if (play.level == 2)
         {
             Gatito.SetActive(false);
             Perrito.SetActive(false);
@@ -47,6 +48,7 @@ public class pintar : MonoBehaviour
             Gnomo.SetActive(false);
             Gatito.SetActive(false);
         }
+        current = null;
     }
 
     // Update is called once per frame
@@ -56,7 +58,7 @@ public class pintar : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.E) && drawing)
             {
-                current.transform.Rotate(0,0,-100*Time.deltaTime,Space.Self);
+                current.transform.Rotate(0, 0, -100 * Time.deltaTime, Space.Self);
             }
             if (Input.GetKey(KeyCode.Q) && drawing)
             {
@@ -71,12 +73,17 @@ public class pintar : MonoBehaviour
             ymouse = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
 
             //Change color
-            if (xwheel -1f < xmouse && xmouse < xwheel + 1f && ywheel - 1f < ymouse && ymouse < ywheel +1f)
+            float dx = xmouse - xwheel;
+            float dy = ymouse - ywheel;
+            float dist2 = dx * dx + dy * dy;
+            float angle = 180 / Mathf.PI * (dy >= 0 ? Mathf.Acos(dx / Mathf.Sqrt(dx * dx + dy * dy)) : 2 * Mathf.PI - Mathf.Acos(dx / Mathf.Sqrt(dx * dx + dy * dy)));
+
+            if (0.1f < dist2 && dist2 < 0.275f)
             {
-                if (xwheel - 0.1f < xmouse && xmouse < xwheel + 0.1f && ywheel - 1f < ymouse && ymouse < ywheel)
+                /*if (xwheel - 0.1f < xmouse && xmouse < xwheel + 0.1f && ywheel - 1f < ymouse && ymouse < ywheel)
                 {
                     color = new Color(0.60000f, 0.00000f, 0.80000f);//Color(0.643f, 0.129f, 0.920f); //Lila
-                }   
+                }
                 if (xwheel - 0.1f < xmouse && xmouse < xwheel + 0.1f && ywheel < ymouse && ymouse < ywheel + 1f)
                 {
                     color = new Color(255/255, 255/255, 0/255);
@@ -88,6 +95,54 @@ public class pintar : MonoBehaviour
                 if (xwheel < xmouse && xmouse < xwheel + 1f && ywheel-0.1f < ymouse && ymouse < ywheel + 0.1f)
                 {
                     color = new Color(0.10000f, 0.00000f, 0.0000f); // Color(255/255, 51/255, 51/255); //Vermell
+                }*/
+                if (angle < 15 || 345 <= angle)
+                {
+                    color = new Color(1f, 0f, 0f);
+                }
+                if (angle < 45 && 15 <= angle)
+                {
+                    color = new Color(1f, 0.33333333f, 0f);
+                }
+                if (angle < 75 && 45 <= angle)
+                {
+                    color = new Color(1f, 0.66666667f, 0f);
+                }
+                if (angle < 105 && 75 <= angle)
+                {
+                    color = new Color(1f, 1f, 0f);
+                }
+                if (angle < 135 && 105 <= angle)
+                {
+                    color = new Color(0.66666667f, 0.66666667f, 0.33333333f);
+                }
+                if (angle < 165 && 135 <= angle)
+                {
+                    color = new Color(0.33333333f, 0.33333333f, 0.66666667f);
+                }
+                if (angle < 195 && 165 <= angle)
+                {
+                    color = new Color(0f, 0f, 1f);
+                }
+                if (angle < 225 && 195 <= angle)
+                {
+                    color = new Color(0.33333333f, 0f, 1f);
+                }
+                if (angle < 255 && 225 <= angle)
+                {
+                    color = new Color(0.66666667f, 0f, 1f);
+                }
+                if (angle < 285 && 255 <= angle)
+                {
+                    color = new Color(1f, 0f, 1f);
+                }
+                if (angle < 315 && 285 <= angle)
+                {
+                    color = new Color(1f, 0f, 0.33333333f);
+                }
+                if (angle < 345 && 315 <= angle)
+                {
+                    color = new Color(1f, 0f, 0.66666667f);
                 }
 
                 for (int i = 0; i < figures.Length; i++)
@@ -112,15 +167,20 @@ public class pintar : MonoBehaviour
                 }
 
             }
-            if (drawing && Camera.main.ScreenToWorldPoint(Input.mousePosition).x >0 && Camera.main.ScreenToWorldPoint(Input.mousePosition).y < 2.98)
+            if (drawing && Camera.main.ScreenToWorldPoint(Input.mousePosition).x > 0 && Camera.main.ScreenToWorldPoint(Input.mousePosition).y < 2.98)
             {
-                current.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 3f - current_depth );
+                current.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0f, 0f, 3f - current_depth);
             }
         }
         else
         {
+            if (current != null)
+            {
+                my_draws.Add(current);
+            }
+            current = null;
             drawing = false;
         }
-        
+
     }
 }
