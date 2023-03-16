@@ -14,20 +14,13 @@ ScriptsOnlyBuild:
     Unity.2D.IK.Editor.dll:
     - UnityEditor.U2D.IK.IKEditorManager
     Unity.2D.Tilemap.Editor.dll:
-    - UnityEditor.Tilemaps.GridBrush
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
     - UnityEditor.Tilemaps.GridPalettes
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.SceneViewOpenTilePaletteHelper
     - UnityEditor.Tilemaps.TileDragAndDropManager
-    - UnityEditor.Tilemaps.TilemapEditorToolPreferences
     - UnityEditor.Tilemaps.TilemapPrefabStageHelper
-    Unity.2D.Tilemap.Extras.Editor.dll:
-    - UnityEditor.Tilemaps.GameObjectBrush
-    - UnityEditor.Tilemaps.GroupBrush
-    - UnityEditor.Tilemaps.LineBrush
-    - UnityEditor.Tilemaps.RandomBrush
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
@@ -37,8 +30,6 @@ ScriptsOnlyBuild:
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
     - TMPro.TextMeshProUGUI
-    Unity.Timeline.Editor.dll:
-    - TimelineProjectSettings
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -114,21 +105,21 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 2750}
+      Script: {instanceID: 2596}
     - Class: 114
-      Script: {instanceID: 2922}
+      Script: {instanceID: 2768}
     - Class: 114
-      Script: {instanceID: 3158}
+      Script: {instanceID: 3004}
     - Class: 114
-      Script: {instanceID: 4386}
+      Script: {instanceID: 4232}
     - Class: 114
-      Script: {instanceID: 5850}
+      Script: {instanceID: 5696}
     - Class: 114
-      Script: {instanceID: 6516}
+      Script: {instanceID: 6362}
     - Class: 114
-      Script: {instanceID: 6712}
+      Script: {instanceID: 6558}
     - Class: 114
-      Script: {instanceID: 7096}
+      Script: {instanceID: 6942}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -171,19 +162,19 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 2922}
+      Script: {instanceID: 2768}
     - Class: 114
-      Script: {instanceID: 3158}
+      Script: {instanceID: 3004}
     - Class: 114
-      Script: {instanceID: 5850}
+      Script: {instanceID: 5696}
     - Class: 114
-      Script: {instanceID: 6516}
+      Script: {instanceID: 6362}
     - Class: 114
-      Script: {instanceID: 6712}
+      Script: {instanceID: 6558}
     - Class: 114
-      Script: {instanceID: 7096}
+      Script: {instanceID: 6942}
     - Class: 114
-      Script: {instanceID: 8608}
+      Script: {instanceID: 8454}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -224,31 +215,31 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1562}
     - Class: 114
-      Script: {instanceID: 2436}
+      Script: {instanceID: 2282}
     - Class: 114
-      Script: {instanceID: 2922}
+      Script: {instanceID: 2768}
     - Class: 114
-      Script: {instanceID: 3158}
+      Script: {instanceID: 3004}
     - Class: 114
-      Script: {instanceID: 3412}
+      Script: {instanceID: 3258}
     - Class: 114
-      Script: {instanceID: 3492}
+      Script: {instanceID: 3338}
     - Class: 114
-      Script: {instanceID: 4572}
+      Script: {instanceID: 4418}
     - Class: 114
-      Script: {instanceID: 4700}
+      Script: {instanceID: 4546}
     - Class: 114
-      Script: {instanceID: 5010}
+      Script: {instanceID: 4856}
     - Class: 114
-      Script: {instanceID: 5850}
+      Script: {instanceID: 5696}
     - Class: 114
-      Script: {instanceID: 6516}
+      Script: {instanceID: 6362}
     - Class: 114
-      Script: {instanceID: 6712}
+      Script: {instanceID: 6558}
     - Class: 114
-      Script: {instanceID: 7096}
+      Script: {instanceID: 6942}
     - Class: 114
-      Script: {instanceID: 9046}
+      Script: {instanceID: 8892}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -291,21 +282,21 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 2922}
+      Script: {instanceID: 2768}
     - Class: 114
-      Script: {instanceID: 3158}
+      Script: {instanceID: 3004}
     - Class: 114
-      Script: {instanceID: 4386}
+      Script: {instanceID: 4232}
     - Class: 114
-      Script: {instanceID: 5850}
+      Script: {instanceID: 5696}
     - Class: 114
-      Script: {instanceID: 6516}
+      Script: {instanceID: 6362}
     - Class: 114
-      Script: {instanceID: 6712}
+      Script: {instanceID: 6558}
     - Class: 114
-      Script: {instanceID: 6766}
+      Script: {instanceID: 6612}
     - Class: 114
-      Script: {instanceID: 7096}
+      Script: {instanceID: 6942}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -352,23 +343,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1562}
     - Class: 114
-      Script: {instanceID: 2922}
+      Script: {instanceID: 2768}
     - Class: 114
-      Script: {instanceID: 3158}
+      Script: {instanceID: 3004}
     - Class: 114
-      Script: {instanceID: 3492}
+      Script: {instanceID: 3338}
     - Class: 114
-      Script: {instanceID: 4848}
+      Script: {instanceID: 4694}
     - Class: 114
-      Script: {instanceID: 5850}
+      Script: {instanceID: 5696}
     - Class: 114
-      Script: {instanceID: 6516}
+      Script: {instanceID: 6362}
     - Class: 114
-      Script: {instanceID: 6712}
+      Script: {instanceID: 6558}
     - Class: 114
-      Script: {instanceID: 7096}
+      Script: {instanceID: 6942}
     - Class: 114
-      Script: {instanceID: 7992}
+      Script: {instanceID: 7838}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1589,4 +1580,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Dinar_abstracte.unity
   - Assets/Scenes/petits_detalls.unity
   - "Assets/Scenes/tangram art\xEDstic.unity"
-  playerPath: C:/Users/u172802/Pictures/Unfocused.exe
+  playerPath: E:/sus/Unfocused.exe

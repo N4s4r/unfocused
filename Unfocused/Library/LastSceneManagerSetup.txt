@@ -1,5 +1,5 @@
 sceneSetups:
-- path: "Assets/Scenes/tangram art\xEDstic.unity"
+- path: Assets/Scenes/petits_detalls.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
