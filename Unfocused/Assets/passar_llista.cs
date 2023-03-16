@@ -13,7 +13,7 @@ public class passar_llista : MonoBehaviour
     public static float time=60f, time_speaking, particle_size = 2f;
     public TMP_Text timer, titol, txt_alumnes;
     public ParticleSystem blur;
-    
+    private float speed=0.1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +30,14 @@ public class passar_llista : MonoBehaviour
                 GameObject.Find(alumnes[i]).GetComponent<SpriteRenderer>().enabled = false;
             }
         }
+        if (play.level == 2)
+        {
+            speed = 0.05f;
+        }
+        if (play.level == 3)
+        {
+            speed = 0.001f;
+        }
     }
 
     // Update is called once per frame
@@ -37,7 +45,7 @@ public class passar_llista : MonoBehaviour
     {
         time_speaking += Time.deltaTime;
         var main = blur.main;
-        main.startSize = particle_size - 0.1f*time_speaking;
+        main.startSize = particle_size - speed*time_speaking;
         if (time > 0)
         {
             time -= Time.deltaTime;

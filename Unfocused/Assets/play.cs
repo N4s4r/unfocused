@@ -227,18 +227,99 @@ public class play : MonoBehaviour
                 textDisplay.gameObject.SetActive(false);
                 textDisplay2.gameObject.SetActive(true);
                 var time = esmorzar_a_cegues.time;
+                if (time < 0)
+                {
+                    time = 0f;
+                }
                 float minutes = Mathf.FloorToInt(time / 60);
                 float seconds = Mathf.FloorToInt(time % 60);
                 string timer = string.Format("{0:00}:{1:00}", minutes, seconds);
-                esmorzar.text = "Esmorzar a cegues: " + esmorzar_a_cegues.num_correct.ToString() + " Aliments " + timer + " seconds left\t= "+ scores[0, level - 2] + " Punts\t\tGood";
+                string feedback = "";
+                if(scores[0, level - 2]> esmorzar_a_cegues.num_aliments)
+                {
+                    feedback = "Excepcional"; //Sobresaliente
+                }
+                else if(scores[0, level - 2] == esmorzar_a_cegues.num_aliments)
+                {
+                    feedback = "Perfecte"; //Sobresaliente
+                }
+                else if (scores[0, level - 2] >= esmorzar_a_cegues.num_aliments - 1)
+                {
+                    feedback = "Excel·lent"; //Sobresaliente
+                }
+                else if (scores[0, level - 2] >= esmorzar_a_cegues.num_aliments - 2)
+                {
+                    feedback = "Normal"; //Sobresaliente
+                }
+                else if (scores[0, level - 2] > 0)
+                {
+                    feedback = "Insuficient"; //Sobresaliente
+                }
+                else
+                {
+                    feedback = "Deficient";
+                }
+                esmorzar.text = "Esmorzar a cegues: " + esmorzar_a_cegues.num_correct.ToString() + " Aliments " + timer + " seconds left\t= "+ scores[0, level - 2] + " Punts\t\t"+feedback;
                 esmorzar.gameObject.SetActive(true);
                 time = passar_llista.time;
+                if (time < 0)
+                {
+                    time = 0f;
+                }
                 minutes = Mathf.FloorToInt(time / 60);
                 seconds = Mathf.FloorToInt(time % 60);
                 timer = string.Format("{0:00}:{1:00}", minutes, seconds);
-                detalls.text = "Petits detalls: "+ passar_llista.num_alumnes.ToString() + " Alumnes "+ timer + " seconds left = " + scores[1, level-2] + " Punts\t\tGood";
+                if (scores[1, level - 2] > 16)
+                {
+                    feedback = "Excepcional"; //Sobresaliente
+                }
+                else if (scores[1, level - 2] == 16)
+                {
+                    feedback = "Perfecte"; //Sobresaliente
+                }
+                else if (scores[1, level - 2] >= 13)
+                {
+                    feedback = "Excel·lent"; //Sobresaliente
+                }
+                else if (scores[1, level - 2] >= 8)
+                {
+                    feedback = "Normal"; //Sobresaliente
+                }
+                else if (scores[1, level - 2] > 0)
+                {
+                    feedback = "Insuficient"; //Sobresaliente
+                }
+                else
+                {
+                    feedback = "Deficient";
+                }
+                detalls.text = "Petits detalls: "+ passar_llista.num_alumnes.ToString() + " Alumnes "+ timer + " seconds left\t = " + scores[1, level-2] + " Punts\t\t"+feedback;
                 detalls.gameObject.SetActive(true);
-                abstracte.text = "Un dinar abstracte: "+ dinar.correctes.ToString()+ " Aliments correctes\t= "+ scores[2, level - 2] + " Punts\t\tGood";
+                if (scores[2, level - 2] >= dinar.size)
+                {
+                    feedback = "Excepcional"; //Sobresaliente
+                }
+                else if (scores[2, level - 2] == dinar.size-2)
+                {
+                    feedback = "Perfecte"; //Sobresaliente
+                }
+                else if (scores[2, level - 2] == dinar.size-4)
+                {
+                    feedback = "Excel·lent"; //Sobresaliente
+                }
+                else if (scores[2, level - 2] == dinar.size-6)
+                {
+                    feedback = "Normal"; //Sobresaliente
+                }
+                else if (scores[2, level - 2] > 0)
+                {
+                    feedback = "Insuficient"; //Sobresaliente
+                }
+                else
+                {
+                    feedback = "Deficient";
+                }
+                abstracte.text = "Un dinar abstracte: "+ dinar.correctes.ToString()+ " Aliments correctes\t= "+ scores[2, level - 2] + " Punts\t\t"+feedback;
                 abstracte.gameObject.SetActive(true);
                 tangram.gameObject.SetActive(true);
                 total.text = "Final Score = "+ (scores[0, level - 2]+ scores[1, level - 2]+ scores[2, level - 2]).ToString();

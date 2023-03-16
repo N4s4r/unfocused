@@ -402,8 +402,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\"No et puc dir qu\xE8 trobo malament, per\xF2 dir\xE9 el que trobo correcte.
     Ets un meravellos m\xFAsic, i la m\xFAsica \xE9s la teva vida. El que jo prescriuria,
-    en un cas com el teu, \xE9s una vida que consisteix\r totalment de m\xFAsica.
-    La m\xFAsica ha estat el centre, ara fes-ne el conjunt, de la teva vida\""
+    en un cas com el teu, \xE9s una vida que consisteix\r                  totalment
+    de m\xFAsica. La m\xFAsica ha estat el centre, ara fes-ne el conjunt, de la teva
+    vida\""
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}

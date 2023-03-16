@@ -5,7 +5,7 @@ using TMPro;
 
 public class dinar : MonoBehaviour
 {
-    public TMP_Text definicio, data; 
+    public TMP_Text definicio, data, number; 
     private int day;
     private GameObject[,] itemsDay1 = new GameObject[4,5];
     private GameObject[,] itemsDay2 = new GameObject[5,6];
@@ -145,6 +145,7 @@ public class dinar : MonoBehaviour
                 }
             }
         }
+        number.text = (id + 1).ToString() + "/" + size.ToString();
     }
 
     // Update is called once per frame
@@ -190,7 +191,7 @@ public class dinar : MonoBehaviour
 
                     if (id != 3) {
                         id = id + 1;
-
+                        number.text = (id + 1).ToString() + "/" + size.ToString();
                         definicio.text = definitionsDay1[id];
 
                         for(int i = 0; i < itemsDay1.GetLength(1); i++) {
@@ -233,7 +234,7 @@ public class dinar : MonoBehaviour
 
                     if (id != 4) {
                         id = id + 1;
-
+                        number.text = (id + 1).ToString() + "/" + size.ToString();
                         definicio.text = definitionsDay2[id];
 
                         for(int i = 0; i < itemsDay2.GetLength(1); i++) {
@@ -276,7 +277,7 @@ public class dinar : MonoBehaviour
 
                     if (id != 5) {
                         id = id + 1;
-
+                        number.text = (id + 1).ToString() + "/" + size.ToString();
                         definicio.text = definitionsDay3[id];
 
                         for(int i = 0; i < itemsDay3.GetLength(1); i++) {

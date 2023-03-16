@@ -522,7 +522,7 @@ ScriptsOnlyBuild:
     className: SkeletonAsset
   - hash:
       serializedVersion: 2
-      Hash: 157fbbde97c9b46ff38bc4a58c0ae924
+      Hash: dfc06c5cb12b7033bcc5266dd32acd01
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: dinar
