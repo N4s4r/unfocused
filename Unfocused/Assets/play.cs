@@ -8,7 +8,7 @@ using TMPro;
 public class play : MonoBehaviour
 {
     // Start is called before the first frame update
-    public static int level = 3;
+    public static int level = 1;
     float[,] scores = new float[4,3];
     string current_scene;
     List<string> scenes;
@@ -19,6 +19,7 @@ public class play : MonoBehaviour
     public GameObject EventManager, camera, Doctor;
     void Start()
     {
+        Screen.SetResolution(1920, 1080, true);
         scenes = new List<string> { "esmorzar_a_cegues", "petits_detalls", "Dinar_abstracte", "tangram artístic" };
         missatges = new List<List<string>>();
         missatges.Add(new List<string>() {"El Dr P. va ser un músic de distinció, conegut durant molts anys com a cantant, i després, a l'Escola de Música local, com a professor.\n\n Recentment el seu voltant s'havia adonat de petits incidents que denotaven que el Dr P. veia característiques individuals, però no veient el seu context.",
@@ -54,32 +55,32 @@ public class play : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (level == 4 && done41)
-        {
-            Doctor.gameObject.SetActive(false);
-            textDisplay.gameObject.SetActive(true);
-            textDisplay2.gameObject.SetActive(false);
-            abstracte.gameObject.SetActive(false);
-            tangram.gameObject.SetActive(false);
-            esmorzar.gameObject.SetActive(false);
-            detalls.gameObject.SetActive(false);
-            total.gameObject.SetActive(false);
-            final.gameObject.SetActive(true);
-            playButton.GetComponentInChildren<TextMeshProUGUI>().text = "END";
-            ButtonControlPlay.myBoolean = false;
-            level += 1;
-            Debug.Log("FINALLL");
-        }
-        else if (level > 4)
-        {
-            Application.Quit();
-            Debug.Log("Exit");
-        }
-        else if(ButtonControlPlay.myBoolean == true)
+        if(ButtonControlPlay.myBoolean == true)
         {
             Debug.Log("Num Aliments: "+esmorzar_a_cegues.num_aliments.ToString());
             Debug.Log("Num Correctes: " + esmorzar_a_cegues.num_correct.ToString());
-            if(done == false)
+            if (level == 4 && done41)
+            {
+                Doctor.gameObject.SetActive(false);
+                textDisplay.gameObject.SetActive(false);
+                textDisplay2.gameObject.SetActive(false);
+                abstracte.gameObject.SetActive(false);
+                tangram.gameObject.SetActive(false);
+                esmorzar.gameObject.SetActive(false);
+                detalls.gameObject.SetActive(false);
+                total.gameObject.SetActive(false);
+                final.gameObject.SetActive(true);
+                playButton.GetComponentInChildren<TextMeshProUGUI>().text = "END";
+                ButtonControlPlay.myBoolean = false;
+                level += 1;
+                Debug.Log("FINALLL");
+            }
+            else if (level > 4)
+            {
+                Application.Quit();
+                Debug.Log("Exit");
+            }
+            else if (done == false)
             {
                 //playButton.gameObject.SetActive(false);
                 titol.gameObject.SetActive(false);
@@ -221,6 +222,7 @@ public class play : MonoBehaviour
 
             else if(done4 && !done41)
             {
+                Debug.Log("GGGGG");
                 Doctor.gameObject.SetActive(true);
                 textDisplay.gameObject.SetActive(false);
                 textDisplay2.gameObject.SetActive(true);
